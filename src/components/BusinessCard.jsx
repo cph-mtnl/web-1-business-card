@@ -8,14 +8,14 @@ import styles from "./BusinessCard.module.css";
  }
 */
 
-const BusinessCard = ({name, job, website}) => {
+const BusinessCard = ({ name, job, website }) => {
   return (
-   <div className={styles.card}>
-    <p>{name}</p>
-    <p>{job}</p>
-    <p>{website}</p>
-   </div>
+    <div className={styles.card}>
+      <p>{name}</p>
+      <p>{job}</p>
+      <p>{website}</p>
+    </div>
   );
-}
+};
 
 export default BusinessCard;
