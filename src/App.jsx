@@ -1,13 +1,11 @@
-import TheHeader from "./components/TheHeader";
-import TheMain from "./components/TheMain";
+import MainPage from "./pages/MainPage.jsx";
 
 function App() {
-  return (
-    <>
-      <TheHeader />
-      <TheMain />
-    </>
-  );
+    return (
+        <>
+            <MainPage></MainPage>
+        </>
+    );
 }
 
 export default App
