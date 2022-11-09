@@ -14,30 +14,33 @@ export default function TheMain() {
       "My spare time is pretty stereotypical with family, friends, tv-shows and gaming (currently Dota 2 and Apex Legends), but enough about me!",
   };
 
+  const people = [
+    {
+      name: "Laura Smith",
+      job: "Frontend Devoloper",
+      website: "laurasmith.website",
+    },
+    {
+      name: "Laura Nielsen",
+      job: "Backend Devoloper",
+      website: "nielsen.website",
+    },
+  ];
+
   return (
     <main className={styles.main}>
       <div className={styles.split}>
         <div className={styles.cardLayout}>
-          <BusinessCard
-            name="Laura Smith"
-            job="Frontend Devoloper"
-            website="laurasmith.website"
-          />
-          <BusinessCard
-            name="Laura Nielsen"
-            job="Frontend Devoloper"
-            website="laurasmith.website"
-          />
-          <BusinessCard
-            name="Laura JohnJohn"
-            job="Frontend Devoloper"
-            website="laurasmith.website"
-          />
-          <BusinessCard
-            name="Laura Something"
-            job="Frontend Devoloper"
-            website="laurasmith.website"
-          />
+          {people.map((person, index) => {
+            return (
+              <BusinessCard
+                key={"business-cards-" + index}
+                name={person.name}
+                job={person.job}
+                website={person.website}
+              />
+            );
+          })}
         </div>
       </div>
       <div className={styles.split}>
