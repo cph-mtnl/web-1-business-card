@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./TheHeader.module.css";
-import Modal from "react-modal";
+import CreateBusinessCard from "./CreateBusinessCard";
 
 export default function TheHeader() {
-  let [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
     setShowModal(true);
@@ -19,13 +19,7 @@ export default function TheHeader() {
       <button onClick={handleClick} className={styles.button}>
         Create new
       </button>
-      <Modal
-        isOpen={showModal}
-        onRequestClose={closeModal}
-        contentLabel="Create new business card"
-      >
-        <h1>Temporary</h1>
-      </Modal>
+      <CreateBusinessCard showModal={showModal} closeModal={closeModal} />
     </header>
   );
 }
