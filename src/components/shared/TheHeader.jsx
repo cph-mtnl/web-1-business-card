@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./TheHeader.module.css";
 import CreateBusinessCard from "./CreateBusinessCard";
+import MyButton from "../atoms/MyButton";
 
 export default function TheHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -16,9 +17,7 @@ export default function TheHeader() {
   return (
     <header className={styles.header}>
       <h1>Business card</h1>
-      <button onClick={handleClick} className={styles.button}>
-        Create new
-      </button>
+      <MyButton text="Create new" onClick={handleClick} />
       <CreateBusinessCard showModal={showModal} closeModal={closeModal} />
     </header>
   );

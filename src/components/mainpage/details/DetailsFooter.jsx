@@ -1,5 +1,5 @@
 import styles from "./DetailsFooter.module.css";
-import SocialButton from "./SocialButton.jsx";
+import SocialButton from "./SocialButton";
 
 const DetailsFooter = () => {
   const data = [
