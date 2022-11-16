@@ -2,11 +2,15 @@ import styles from "./TheMain.module.css";
 import BusinessCard from "./BusinessCard.jsx";
 import BusinessDetails from "../details/BusinessDetails.jsx";
 import { useEffect } from "react";
+import { transformToArray } from "../../utils/firebase-utils";
+import { useState } from "react";
 
 const url =
   "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/business-contacts.json";
 
 export default function TheMain() {
+  const [contacts, setContacts] = useState([]);
+
   const businessDetails = {
     name: "Mathias Nielsen",
     job: "Adjunkt",
@@ -20,13 +24,21 @@ export default function TheMain() {
 
   // Using Promise chains
   useEffect(() => {
-    console.log("useEffect executed");
+    // TODO: Activating the spinner
+    // console.log("useEffect executed");
     fetch(url)
       .then((response) => response.json())
       .then((body) => {
-        console.log("promise chains", body);
+        // console.log("promise chains", body);
+        const asArray = transformToArray(body);
+        setContacts(asArray);
+        // TODO: Hide the spinner.
       });
   }, []);
+
+  useEffect(() => {
+    console.log(contacts);
+  }, [contacts]);
 
   // Using async/await
   /*
@@ -40,30 +52,17 @@ export default function TheMain() {
   }, []);
   */
 
-  const people = [
-    {
-      name: "Laura Smith",
-      job: "Frontend Devoloper",
-      website: "laurasmith.website",
-    },
-    {
-      name: "Laura Nielsen",
-      job: "Backend Devoloper",
-      website: "nielsen.website",
-    },
-  ];
-
   return (
     <main className={styles.main}>
       <div className={styles.split}>
         <div className={styles.cardLayout}>
-          {people.map((person, index) => {
+          {contacts.map((contact, index) => {
             return (
               <BusinessCard
                 key={"business-cards-" + index}
-                name={person.name}
-                job={person.job}
-                website={person.website}
+                name={contact.name}
+                job={contact.job}
+                website={contact.website}
               />
             );
           })}
