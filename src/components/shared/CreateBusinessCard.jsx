@@ -6,6 +6,7 @@ import Spinner from "../atoms/Spinner";
 
 export default function CreateBusinessCard({ showModal, closeModal }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("Temporary error message");
 
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
@@ -59,6 +60,7 @@ export default function CreateBusinessCard({ showModal, closeModal }) {
             onChange={updateWebsite}
           />
         </div>
+        {errorMsg && <p>{errorMsg}</p>}
         {isLoading ? (
           <Spinner />
         ) : (

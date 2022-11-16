@@ -1,6 +1,10 @@
 import styles from "./TheMain.module.css";
 import BusinessCard from "./BusinessCard.jsx";
 import BusinessDetails from "../details/BusinessDetails.jsx";
+import { useEffect } from "react";
+
+const url =
+  "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/business-contacts.json";
 
 export default function TheMain() {
   const businessDetails = {
@@ -13,6 +17,28 @@ export default function TheMain() {
     interests:
       "My spare time is pretty stereotypical with family, friends, tv-shows and gaming (currently Dota 2 and Apex Legends), but enough about me!",
   };
+
+  // Using Promise chains
+  useEffect(() => {
+    console.log("useEffect executed");
+    fetch(url)
+      .then((response) => response.json())
+      .then((body) => {
+        console.log("promise chains", body);
+      });
+  }, []);
+
+  // Using async/await
+  /*
+  useEffect(() => {
+    async function getData() {
+      const response = await fetch(url);
+      const body = await response.json();
+      console.log("async/await", body);
+    }
+    getData();
+  }, []);
+  */
 
   const people = [
     {
