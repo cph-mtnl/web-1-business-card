@@ -2,8 +2,11 @@ import Modal from "react-modal";
 import { useState } from "react";
 import styles from "./CreateBusinessCard.module.css";
 import MyButton from "../atoms/MyButton";
+import Spinner from "../atoms/Spinner";
 
 export default function CreateBusinessCard({ showModal, closeModal }) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const [name, setName] = useState("");
   const [job, setJob] = useState("");
   const [website, setWebsite] = useState("");
@@ -18,6 +21,10 @@ export default function CreateBusinessCard({ showModal, closeModal }) {
 
   const updateWebsite = (event) => {
     setWebsite(event.target.value);
+  };
+
+  const handleCreate = () => {
+    setIsLoading(true);
   };
 
   return (
@@ -52,7 +59,11 @@ export default function CreateBusinessCard({ showModal, closeModal }) {
             onChange={updateWebsite}
           />
         </div>
-        <MyButton text="Create" />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <MyButton text="Create" onClick={handleCreate} />
+        )}
       </div>
     </Modal>
   );
