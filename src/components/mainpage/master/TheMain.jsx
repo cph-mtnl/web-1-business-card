@@ -29,7 +29,7 @@ export default function TheMain() {
     fetch(url)
       .then((response) => response.json())
       .then((body) => {
-        // console.log("promise chains", body);
+        console.log("promise chains", body);
         const asArray = transformToArray(body);
         setContacts(asArray);
         // TODO: Hide the spinner.
