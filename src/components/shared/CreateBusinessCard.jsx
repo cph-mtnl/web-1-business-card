@@ -3,29 +3,37 @@ import { useState } from "react";
 import styles from "./CreateBusinessCard.module.css";
 import MyButton from "../atoms/MyButton";
 import Spinner from "../atoms/Spinner";
+import { useReducer } from "react";
 
 export default function CreateBusinessCard({ showModal, closeModal }) {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("Temporary error message");
 
-  const [name, setName] = useState("");
-  const [job, setJob] = useState("");
-  const [website, setWebsite] = useState("");
-
-  const updateName = (event) => {
-    setName(event.target.value);
+  const reducer = (state, newValues) => {
+    return { ...state, ...newValues };
   };
 
-  const updateJob = (event) => {
-    setJob(event.target.value);
-  };
+  const [formValues, dispatch] = useReducer(reducer, {
+    name: "",
+    job: "",
+    website: "",
+    isTeacher: false,
+  });
 
-  const updateWebsite = (event) => {
-    setWebsite(event.target.value);
+  const updateFormValue = (event) => {
+    const { name, value, type, checked } = event.target;
+    const result = type === "radio" || type === "checkbox" ? checked : value;
+    dispatch({
+      [name]: result,
+    });
   };
 
   const handleCreate = () => {
     setIsLoading(true);
+    fetch("google.com", {
+      method: "POST",
+      body: JSON.stringify(formValues),
+    });
   };
 
   return (
@@ -39,25 +47,31 @@ export default function CreateBusinessCard({ showModal, closeModal }) {
         <h1>Create a new business contact</h1>
         <div className={styles.defaultFlex}>
           <input
+            type={"checkbox"}
+            name="isTeacher"
+            onChange={updateFormValue}
+            checked={formValues.isTeacher}
+          />
+          <input
             type="text"
             placeholder="Name"
             name="name"
-            value={name}
-            onChange={updateName}
+            value={formValues.name}
+            onChange={updateFormValue}
           />
           <input
             type="text"
             placeholder="Job title"
             name="job"
-            value={job}
-            onChange={updateJob}
+            value={formValues.job}
+            onChange={updateFormValue}
           />
           <input
             type="text"
             placeholder="Website"
             name="name"
-            value={website}
-            onChange={updateWebsite}
+            value={formValues.website}
+            onChange={updateFormValue}
           />
         </div>
         {errorMsg && <p>{errorMsg}</p>}

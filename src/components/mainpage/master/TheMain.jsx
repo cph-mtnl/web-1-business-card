@@ -4,12 +4,13 @@ import BusinessDetails from "../details/BusinessDetails.jsx";
 import { useEffect } from "react";
 import { transformToArray } from "../../utils/firebase-utils";
 import { useState } from "react";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 const url =
   "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/business-contacts.json";
 
 export default function TheMain() {
-  const [contacts, setContacts] = useState([]);
+  const { contacts, setContacts } = useGlobalContext();
 
   const businessDetails = {
     name: "Mathias Nielsen",
